@@ -17,12 +17,20 @@ app.get("/bai1/list-user", async (req, res) => {
   res.status(200).json(list);
 });
 
-app.get("/ba1/get-user-by-id/:id", async (req, res) => {
+app.get("/bai1/get-user-by-id/:id", async (req, res) => {
   const user = await User1.findOne({ where: { id: req.params.id } });
   res.status(200).json(user);
 });
 
-app.post("bai1/update-so-tien/:id", async (req, res) => {
+app.post("/bai1/get-user", async (req, res) => {
+  const { name, kieuthe, sothe, cvc } = req.body;
+  const user = await User1.findOne({
+    where: { name: name, kieuthe: kieuthe, sothe: sothe, cvc: cvc },
+  });
+  res.status(200).json(user);
+});
+
+app.post("/bai1/update-so-tien/:id", async (req, res) => {
   await User1.update(
     { sotien: req.body.sotien },
     {
